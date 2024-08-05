@@ -1,0 +1,211 @@
+/*1. Declara una variable de tipo `string` y asígnale un valor. */
+let saludo:string = 'Hola'
+console.log(saludo)
+
+console.log(saludo)
+
+/*2. Declara una variable de tipo `number` y asígnale un valor. */
+let numero:number = 10
+
+console.log(numero)
+
+/* 3. Declara una variable de tipo `boolean` y asígnale un valor.*/
+let bool:boolean = true
+console.log(bool)
+
+/*4. Escribe una función que sume dos números y retorne el resultado. */
+
+function suma (num1:number, num2:number):number{
+    return num1+num2
+}
+console.log(suma(1,2))
+
+/* 5. Escribe una función que tome un nombre como argumento y retorne un saludo. */
+
+function saludos(nombre: string): string {
+    return `Hola, ${nombre}`;
+  }
+  
+  console.log(saludos("Jose"));
+  
+
+/* 6. Crea una interfaz `Person` con propiedades `name` (string) y `age` (number). */
+
+interface Person {
+    name:string;
+    age:number
+}
+const Persona: Person = {
+    name:'Jose',
+    age:20
+};
+
+console.log(Persona);
+
+/* 7. Crea una función que reciba un objeto `Person` y retorne un string con el nombre y edad de la persona. */
+
+type Persona = {
+    nombre: string;
+    edad: number;
+}
+
+function formatearPersona(persona: Persona): string {
+    return `Nombre: ${persona.nombre}, Edad: ${persona.edad}`;
+}
+
+const persona1: Persona = {
+    nombre: 'Jose',
+    edad: 20
+};
+
+console.log(formatearPersona(persona1)); 
+
+
+/*11. Escribe una función que tome un arreglo de números y retorne la suma de todos sus elementos. */
+
+function sumar(numeros: number[]): number {
+    let suma = 0;
+    for (let i = 0; i < numeros.length; i++) {
+        suma += numeros[i];
+    }
+    return suma;
+}
+
+const arregloNumeros = [10, 29, 43, 48, 50];
+console.log(sumar(arregloNumeros)); 
+
+
+/* 12. Crea una clase `Animal` con propiedades `name` (string) y `sound` (string). */
+
+class Animal {
+    name: string;
+    sound: string;
+
+    constructor(name: string, sound: string) {
+        this.name = name;
+        this.sound = sound;
+    }
+}
+
+
+/* 13. Agrega un método a la clase `Animal` que imprima el nombre y sonido del animal. */
+
+class Animal {
+    name: string;
+    sound: string;
+
+    constructor(name: string, sound: string) {
+        this.name = name;
+        this.sound = sound;
+    }
+
+    sonido(): string {
+        return `La ${this.name} hace: ${this.sound}`;
+    }
+}
+
+const vaca = new Animal('Vaca', 'Muuu');
+
+console.log(vaca.sonido()); 
+
+/* 14. Define un enum `Color` con valores `Red`, `Green`, y `Blue`. Declara una variable de tipo `Color` y asígnale un valor. */
+const Red = 'red'
+const Green = 'green'
+const Blue = 'blue'
+
+enum Color {Red='red',Green='green',Blue='blue'}
+
+const variableColor:Color = Color.Red
+console.log(variableColor)
+
+/* 15. Escribe una función de flecha que tome dos números y retorne su suma. */
+
+const sumarNumeros = (nume1:number,nume2:number):number => {
+    return nume1+nume2
+
+};
+
+console.log(sumarNumeros(10,20))
+
+/* 16. Escribe una función de flecha que tome un string y lo convierta a mayúsculas. */
+
+const textoMayuscla =  (texto:string):string =>{
+    return texto.toUpperCase()
+}
+
+console.log(textoMayuscla('Hola'))
+
+
+/* 17. Crea un alias de tipo `Point` para un objeto con propiedades `x` y `y` (ambos `number`). */
+
+type Point = {
+x:number
+y:number
+};
+
+const punto:Point = {
+    x:1,
+    y:2
+};
+console.log(punto)
+
+/* 18. Escribe una función que tome un `Point` y calcule la distancia al origen (0,0). */
+
+type Point = {
+    x: number
+    y: number
+};
+
+const distancia = (punto: Point): number => {
+    return Math.sqrt(punto.x * punto.x + punto.y * punto.y)
+};
+
+const punto: Point = { x: 1, y: 5}
+console.log(distancia(punto))
+
+
+/* 19. Escribe una función que tome un número y un string opcional. Si se proporciona el string, la función debe imprimirlo; de lo contrario, debe imprimir el número. */
+
+function imprimir(numero:number, string?:string ): void{
+
+    if(string){
+        console.log(string)
+    }
+    else{
+        console.log(numero)
+    }
+}
+
+imprimir(10,'Hola')
+imprimir(1)
+
+/* 20. Escribe un programa que imprima los números del 1 al 10 utilizando un bucle. */
+
+//for
+for (let i = 1; i <= 10; i++) {
+    console.log(i);
+}
+
+//while
+
+let i:number = 1
+
+while (i<=10) {
+    console.log(i)
+    i++
+}
+
+
+//do while
+let i:number = 1
+do {
+    console.log(i)
+    i++
+} while (i<=10);
+
+
+
+
+
+
+

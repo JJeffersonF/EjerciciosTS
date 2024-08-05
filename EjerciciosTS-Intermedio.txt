@@ -1,0 +1,333 @@
+/* 1. Crea una función genérica que tome un array de cualquier tipo y retorne el primer elemento. */
+
+function primerElemen<T>(array: T[]):T{
+    return array[0]
+}
+
+const numeross:number[] = [10,20,30,40]
+console.log(primerElemen(numeross))
+
+//2. Escribe dos sobrecargas para una función que pueda tomar ya sea dos números o dos strings y devuelva su concatenación o suma.
+
+function operar(a: number, b: number): number
+function operar(a: string, b: string): string
+
+// Implementación de la función
+function operar(a: number | string, b: number | string): number | string {
+    if (typeof a === 'number' && typeof b === 'number') {
+        return a + b;
+    } else if (typeof a === 'string' && typeof b === 'string') {
+        return a + b  
+    } else {
+        throw new Error("argumentos no compatibles")
+    }
+}
+
+
+console.log(operar(9, 11))     
+console.log(operar("Hello, ", "word"))
+
+
+//3. Crea una clase `Vehicle` con propiedades `make` (string) y `model` (string).
+
+class Vehicle {
+    make:string
+    model:string
+    
+    constructor(make: string,model: string) { 
+        this.make = make
+        this.model = model
+    }
+}
+
+
+//4. Crea una subclase `Car` que extienda de `Vehicle` y agregue una propiedad `numDoors` (number).
+
+class Car extends Vehicle {
+    numDoors:number
+
+    constructor(make: string,model: string,numDoors:number) {  
+        super(make, model)
+        this.numDoors = numDoors
+    }
+}
+
+//5. Define una interfaz `Shape` con un método `area` que retorne un `number`.
+
+interface Shape {
+    area():number
+}
+
+const shape: Shape = {
+    area: () => 100 
+};
+
+console.log(shape.area()); 
+
+//6. Crea clases `Circle` y `Rectangle` que implementen `Shape` y sus métodos.
+
+
+interface Shape {
+    area(): number; 
+}
+
+class Circle implements Shape {
+    radius: number;
+
+    constructor(radius: number) {
+        this.radius = radius;
+    }
+    area(): number {
+        return Math.PI * this.radius * this.radius;
+    }
+}
+
+class Rectangle implements Shape {
+    width: number;
+    height: number;
+
+    constructor(width: number, height: number) {
+        this.width = width;
+        this.height = height;
+    }
+
+    area(): number {
+        return this.width * this.height;
+    }
+}
+
+
+const myCircle = new Circle(10);
+console.log(`Área del círculo: ${myCircle.area()}`); 
+
+const myRectangle = new Rectangle(10, 20);
+console.log(`Área del rectángulo: ${myRectangle.area()}`); 
+
+//7. Escribe una función que devuelva una promesa que se resuelva después de 2 segundos.
+
+function promesa(): Promise<void> {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve()
+        }, 2000)
+    });
+}
+
+promesa().then(() => {
+    console.log('Se resolvera después de 2 segundos.')
+})
+
+//8. Implementa un decorador de método que registre el tiempo de ejecución de un método en consola.
+
+function logExecutionTime(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
+
+    descriptor.value = function(...args: any[]) {
+        console.log(`Iniciando ejecución del método: ${propertyKey}`);
+        const start = performance.now();
+
+        const result = originalMethod.apply(this, args); 
+
+        const end = performance.now();
+        console.log(`Método ${propertyKey} ejecutado en ${end - start} ms`);
+
+        return result;
+    };
+}
+
+
+///10. Crea un tipo que sea la unión de las claves de dos interfaces distintas.
+
+interface A {
+    a: string;
+    b: number;
+}
+
+interface B {
+    b: number;
+    c: boolean;
+}
+
+type UnirLlaves = keyof A | keyof B;
+
+const llave1: UnirLlaves = 'a';
+const llave2: UnirLlaves = 'b'; 
+const llave3: UnirLlaves = 'c'; 
+
+console.log(llave1, llave2, llave3);
+
+//11. Define un tipo que convierta todas las propiedades de un objeto en opcionales.
+
+type Opcional = {
+    id?: number
+    name?: string
+}
+
+const usuario1: Opcional = {
+    name: "Jose"
+}
+
+const usuario2: Opcional = {
+    id: 1
+}
+
+const usuario3: Opcional = {}
+
+console.log(usuario1, usuario2, usuario3)
+
+
+//12. Crea un tipo condicional que devuelva `true` si el tipo es `string`, y `false` en caso contrario.
+
+type esString<T> = T extends string ? true : false;
+
+type Test1 = esString<string>; 
+type Test2 = esString<number>; 
+
+
+const result1: esString<string> = true;
+const result2: esString<number> = false;
+
+console.log(result1);
+console.log(result2); 
+
+
+
+//13. Define una interfaz con propiedades `readonly` y prueba modificar sus valores.
+
+interface Personas {
+    readonly namee: string;
+    readonly agee: number;
+}
+
+const person: Personas = {
+    namee: "Jose",
+    agee: 20
+};
+
+console.log(person.namee); 
+console.log(person.agee);  
+
+
+person.namee = "Manuel"; 
+person.agee = 50; 
+
+
+//14. Crea una clase con un método estático que realice alguna operación matemática.
+
+class Mate {
+    static suma (a:number,b:number): number{
+        return a + b
+    }
+}
+
+const sumar = Mate.suma(10,2)
+
+console.log(sumar)
+
+//15. Define una clase genérica que tome dos tipos y contenga un método que devuelva un objeto que tenga ambas propiedades.
+
+class Combinado<T, U> {
+    tipo01: T
+    tipo02: U
+
+    constructor(tipo01: T, tipo02: U) {
+        this.tipo01 = tipo01
+        this.tipo02 = tipo02
+    }
+
+    Combinado(): { tipo01: T; tipo02: U } {
+        return {
+            tipo01: this.tipo01,
+            tipo02: this.tipo02
+        }
+    }
+}
+
+
+//17. Define un tipo que extraiga el tipo de retorno de una función.
+
+function multiplicar(x: number, y: number): number {
+    return x * y
+}
+
+type Multiplicar = ReturnType<typeof multiplicar>
+
+const resultado: Multiplicar = 42
+console.log(resultado)
+
+const combinado01 = new Combinado<string, number>("Hola", 42)
+const resultado01 = combinado01.Combinado()
+console.log(resultado01)
+
+//18. Crea tipos usando `Extract` y `Exclude` para filtrar tipos de una unión.
+
+type Animal = 'perro' | 'gato' | 'ave' | 'pez'
+type Mamifero = 'perro' | 'gato'
+
+type Mamiferos = Extract<Animal, Mamifero>
+
+type NoMamiferos = Exclude<Animal, Mamifero>
+
+const animal1: Mamiferos = 'perro'
+const animal2: NoMamiferos = 'ave'
+
+console.log(animal1)
+console.log(animal2)
+
+
+//19. Define un tipo que incluya una propiedad opcional y otra que pueda ser `null`.
+
+type Personaa = {
+    nombre?: string;  
+    edad: number | null; 
+};
+
+const persona01: Personaa = {
+    nombre: 'Jose',
+    edad: 20
+};
+
+const persona02: Personaa = {
+    edad: null
+};
+
+console.log(persona01)
+console.log(persona02)
+
+//20. Crea un tipo que sea la intersección de dos tipos.
+
+type Estudiante = {
+    nombre: string
+    edad: number
+    matricula: string
+};
+
+type Curso = {
+    nombreCurso: string
+    creditos: number
+}
+
+type EstudianteCurso = Estudiante & Curso
+
+const estudianteConCurso: EstudianteCurso = {
+    nombre: 'Jose Flores',
+    edad: 20,
+    matricula: '123456789',
+    nombreCurso: 'Programacion',
+    creditos: 5
+};
+
+console.log(estudianteConCurso)
+
+
+
+
+
+ 
+
+
+
+
+
+
+
